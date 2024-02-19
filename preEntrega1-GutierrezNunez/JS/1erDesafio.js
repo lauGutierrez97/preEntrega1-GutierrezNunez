@@ -10,6 +10,7 @@ console.log(password);
 
 //Bucle for para el inicio de sesión
 
+
 for (let i = 1; i <= 3; i++) {
   let nombreUsuario = prompt("Hola ingresa tu usuario");
   let passUsuario = prompt("password");
@@ -21,45 +22,66 @@ for (let i = 1; i <= 3; i++) {
   }
 }
 
+
+
+//funciones para sumar precios del carrito, y para calcular el descuento. Cerveza vale 2.000 pesos. Vino 5.000 y los destilados 7.000
+//la funcion del descuento va a reutilizar luego la funcion de la suma para calcular dicho descuento
+
+function sumaPrecios (unidadesCerveza, unidadesVino, unidadesDestilados){
+  precioTotal = ((unidadesCerveza * 2000) + (unidadesVino * 5000) + (unidadesDestilados * 7000))
+  return  alert ("el total a pagar es $ " + precioTotal)
+}
+
+
+
+function Descuento (precio1, cantidadDescuento){
+  precioDescuento = precio1 - (precio1 * cantidadDescuento)
+  return alert ("Por superar los $100.000 te damos un descuento. El total es de $ " + precioDescuento)
+}
+
+
 //switch para seleccionar que tipo de bebidas quiere.
-//Cerveza vale 2.000 pesos. Vino 5.000 y los destilados 7.000
+
+
 
 let ingreso = prompt(
   "Selecciona una bebida \n 1 Cerveza \n 2 Vino \n 3 Destilados"
 );
 switch (ingreso) {
   case "1":
-    let num1 = prompt("Cuantas unidades necesitas");
-    alert("total a pagar $ " + num1 * 2000);
+    let num1 = parseFloat(prompt("Cuantas unidades necesitas"));
+    sumaPrecios (num1 , 0, 0)
     let continuar = prompt("algo mas?");
     if (continuar != "si") {
-      break;
+      break
     }
 
   case "2":
-    let num2 = prompt("Cuantas unidades necesitas");
-    alert("total a pagar $ " + (num2 * 5000 + num1 * 2000));
+    let num2 = parseFloat(prompt("Cuantas unidades necesitas"));
+    sumaPrecios (0, num2 , 0);
     let continuar2 = prompt("algo mas?");
     if (continuar2 != "si") {
       break;
     }
 
   case "3":
-    let num3 = prompt("Cuantas unidades necesitas");
-    alert("total a pagar $ " + (num3 * 7000 + num1 * 2000 + num2 * 5000));
+    let num3 = parseFloat(prompt("Cuantas unidades necesitas"));
+    sumaPrecios (0, 0, num3)
     let continuar3 = prompt("algo mas?");
     if (continuar3 != "si") {
       break;
     }
 
   case "4":
-    alert(
-      "llegaste al maximo de items, el total es de $ " +
-        (num1 * 2000 + num2 * 5000 + num3 * 7000)
-    );
-    break;
-
-  default:
+    if (precioTotal >= 100000){
+      console.log (precioTotal)
+      Descuento (precioTotal, 0.15)
+      break}else{
+        console.log ("Adios")
+        break
+    }
+    
+     default:
     alert("No seleccionaste ninguna bebida");
 
 }
